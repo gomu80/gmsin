@@ -1,0 +1,66 @@
+# Structured Light Scanner Configuration
+
+# Camera settings
+camera:
+  id: 0
+  resolution:
+    width: 1920
+    height: 1080
+  exposure: auto
+  gain: auto
+
+# Projector settings
+projector:
+  resolution:
+    width: 1920
+    height: 1080
+
+# Pattern settings
+pattern:
+  type: gray_code  # Options: gray_code, phase_shift, de_bruijn, hybrid
+
+  gray_code:
+    direction: both  # horizontal, vertical, both
+    inverse: true
+
+  phase_shift:
+    n_steps: 4
+    n_periods: 64
+    frequencies: [1, 8, 64]  # For multi-frequency unwrapping
+
+  de_bruijn:
+    window_size: 5
+    n_colors: 2
+
+# Calibration settings
+calibration:
+  checkerboard:
+    size: [9, 6]  # Internal corners
+    square_size: 25.0  # mm
+
+  min_images: 10
+  max_images: 30
+
+# Reconstruction settings
+reconstruction:
+  confidence_threshold: 0.3
+  outlier_removal:
+    method: statistical  # statistical, radius
+    nb_neighbors: 20
+    std_ratio: 2.0
+
+  downsample:
+    enabled: false
+    voxel_size: 0.01
+
+# Output settings
+output:
+  directory: data/results
+  format: ply  # ply, xyz, pcd
+  save_intermediate: false
+
+# Advanced settings
+advanced:
+  capture_delay: 0.1  # seconds
+  pattern_display_time: 0.2  # seconds
+  use_gpu: false
