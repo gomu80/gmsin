@@ -92,38 +92,38 @@ set(HARDWARE_SOURCES
 set(PATTERN_SOURCES
     src/pattern/gray_code_generator.cpp
     src/pattern/phase_shift_generator.cpp
-    src/pattern/pattern_projector.cpp
+    src/pattern/de_bruijn_generator.cpp
 )
 
-set(CALIBRATION_SOURCES
-    src/calibration/camera_calibration.cpp
-    src/calibration/projector_calibration.cpp
-    src/calibration/stereo_calibration.cpp
-)
+# set(CALIBRATION_SOURCES
+#     src/calibration/camera_calibration.cpp
+#     src/calibration/projector_calibration.cpp
+#     src/calibration/stereo_calibration.cpp
+# )
 
-set(DECODER_SOURCES
-    src/decoder/gray_code_decoder.cpp
-    src/decoder/phase_decoder.cpp
-)
+# set(DECODER_SOURCES
+#     src/decoder/gray_code_decoder.cpp
+#     src/decoder/phase_decoder.cpp
+# )
 
-set(RECONSTRUCTION_SOURCES
-    src/reconstruction/triangulation.cpp
-    src/reconstruction/point_cloud.cpp
-)
+# set(RECONSTRUCTION_SOURCES
+#     src/reconstruction/triangulation.cpp
+#     src/reconstruction/point_cloud.cpp
+# )
 
-set(CORE_SOURCES
-    src/scanner.cpp
-)
+# set(CORE_SOURCES
+#     src/scanner.cpp
+# )
 
 # === 라이브러리 빌드 ===
 
 add_library(structured_light_core SHARED
     ${HARDWARE_SOURCES}
     ${PATTERN_SOURCES}
-    ${CALIBRATION_SOURCES}
-    ${DECODER_SOURCES}
-    ${RECONSTRUCTION_SOURCES}
-    ${CORE_SOURCES}
+    # ${CALIBRATION_SOURCES}
+    # ${DECODER_SOURCES}
+    # ${RECONSTRUCTION_SOURCES}
+    # ${CORE_SOURCES}
 )
 
 target_include_directories(structured_light_core PUBLIC
@@ -153,13 +153,13 @@ endif()
 
 # === 예제 실행 파일 ===
 
-# 기본 스캔 예제
-add_executable(basic_scan examples/basic_scan.cpp)
-target_link_libraries(basic_scan structured_light_core)
+# 기본 스캔 예제 (나중에 구현)
+# add_executable(basic_scan examples/basic_scan.cpp)
+# target_link_libraries(basic_scan structured_light_core)
 
-# 캘리브레이션 예제
-add_executable(calibration_example examples/calibration_example.cpp)
-target_link_libraries(calibration_example structured_light_core)
+# 캘리브레이션 예제 (나중에 구현)
+# add_executable(calibration_example examples/calibration_example.cpp)
+# target_link_libraries(calibration_example structured_light_core)
 
 # 패턴 생성 예제
 add_executable(pattern_generation examples/pattern_generation.cpp)
@@ -182,7 +182,7 @@ install(DIRECTORY include/
     FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )
 
-install(TARGETS basic_scan calibration_example pattern_generation hardware_test
+install(TARGETS pattern_generation hardware_test
     RUNTIME DESTINATION bin
 )
 
